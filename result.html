@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Risk Analyzer</title>
+</head>
+<style>
+    body {
+        background-color: powderblue;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        font-family: STENCIL;
+        background:linear-gradient( #7bb4ed,#001f3f);
+        color: rgb(5, 2, 2);
+        text-align: center;
+        padding: 40px;
+        font-size: 20px;
+    }
+
+    nav {
+        font-family: STENCIL;
+        font-size: large;
+        display: flex;
+        justify-content: space-around;
+        background: radial-gradient(circle, #0074cc, #00cc6a);
+        padding: 10px;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: #000000;
+        font-weight: bold;
+        padding: 8px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    nav a:hover {
+        background-color: #ddd;
+    }
+
+    section {
+        padding: 20px;
+        text-align: center;
+    }
+    form{
+        font-family: lato;
+        font-size: large;
+    }
+    button{
+        color:black;
+    }
+    
+    
+</style>
+<body>
+    <header><h1>Instagram Risk Analyzer</h1></header>
+    
+    <div class="login-container">
+    <form id="searchForm"><br><br><br><br><br><center>
+        <label for="username"><b>Enter Instagram Username:</b></label>
+        <input type="text" id="username" name="username" required><br><br>
+        <button type="button" onclick="searchAccount()"><b>Search</b></button>
+    </form></center></div>
+
+    <div id="resultContainer"></div>
+
+    <script>
+        function searchAccount() {
+            var username = document.getElementById('username').value;
+
+            // Send username to backend
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/analyzer/analyze_instagram/', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Display the backend response in the result container
+                    var resultContainer = document.getElementById('resultContainer');
+                    resultContainer.innerHTML = "Risk Level: " + JSON.parse(xhr.responseText).risk_level;
+                }
+            };
+
+            // Send the username as POST data
+            xhr.send('username=' + username);
+        }
+    </script>
+</body>
+</html>

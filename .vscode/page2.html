@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Social Media</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        #container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #post-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #posts-container .post {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1>Simple Social Media</h1>
+        <div id="post-form">
+            <textarea id="post-text" placeholder="Write your post..."></textarea>
+            <button onclick="submitPost()">Post</button>
+        </div>
+        <div id="posts-container"></div>
+        <div id="risk-container"></div>
+    </div>
+
+    <script>
+        function submitPost() {
+            const postText = document.getElementById('post-text').value;
+            if (postText.trim() !== '') {
+                const postId = Date.now();
+                addPost(postId, postText);
+                document.getElementById('post-text').value = '';
+
+                // Send the username to PHP backend for analysis
+                const username = prompt("Enter Instagram username for analysis:");
+                if (username) {
+                    temp(username);
+                }
+            }
+        }
+
+        function addPost(postId, postText) {
+            const postsContainer = document.getElementById('posts-container');
+            const postElement = document.createElement('div');
+            postElement.classList.add('post');
+            postElement.innerHTML = `<p>${postText}</p>`;
+            postsContainer.appendChild(postElement);
+        }
+
+        function temp(username) {
+            // Send the username to PHP backend using AJAX
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const result = JSON.parse(xhr.responseText);
+                    displayRiskResult(result);
+                }
+            };
+            xhr.open("GET", `temp.php?username=${username}`, true);
+            xhr.send();
+        }
+
+        function displayRiskResult(result) {
+            const riskContainer = document.getElementById('risk-container');
+            riskContainer.innerHTML = `<p>User: ${result.username}</p><p>Risk Level: ${result.risk_level}</p>`;
+        }
+    </script>
+
+</body>
+</html>

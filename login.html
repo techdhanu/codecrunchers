@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: stencil;
+            background: radial-gradient(circle, #0074cc, #00cc6a);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            font-family: algerian;
+            background-color: lightgrey ;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border-radius: 0%;
+        }
+
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <h1>WELCOME TO THE ANALYZER</h1>
+    <h4>Say No to abusive words</h4>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="your_server_side_script.php" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </form>
+    </div>
+<button onclick="next()">SUBMIT</button>
+<script>
+function next()
+{
+window.location.href='temp1.html';
+}
+
+</script>
+ 
+
+
+</center>
+</body>
+</html>

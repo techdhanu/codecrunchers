@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Account Risk Analyzer</title>
+</head>
+<body>
+    <h1>Instagram Account Risk Analyzer</h1>
+
+    <form id="searchForm">
+        <label for="username">Enter Instagram Username:</label>
+        <input type="text" id="username" name="username" required>
+        <button type="button" onclick="searchAccount()">Search</button>
+    </form>
+
+    <div id="resultContainer"></div>
+
+    <script>
+        function searchAccount() {
+            var username = document.getElementById('username').value;
+
+            // Send username to backend
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'backend.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Display the backend response in the result container
+                    document.getElementById('resultContainer').innerHTML = xhr.responseText;
+                }
+            };
+
+            // Send the username as POST data
+            xhr.send('username=' + username);
+        }
+    </script>
+</body>
+</html>

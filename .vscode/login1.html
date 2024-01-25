@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Homepage</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #f1f1f1;
+            padding: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+        }
+
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>INSTAGRAM</h1>
+</header>
+
+<nav>
+    <a href="#" onclick="changeContent('Home')">Home</a>
+    <a href="login.html" onclick="changeContent('Search')">Search</a>
+    <a href="#" onclick="changeContent('Reels')">Reels</a>
+    <a href="#" onclick="changeContent('Profile')">Profile</a>
+</nav>
+
+<section id="content">
+    <!-- Initial content -->
+    <p></p>
+</section>
+
+<script>
+    function changeContent(page) {
+        var content = document.getElementById('content');
+        switch (page) {
+            case 'Home':
+                content.innerHTML = '<p>This is the Home page content.</p>';
+                break;
+            case 'Search':
+                content.innerHTML = '<p></P>';
+                break;
+            case 'Reels':
+                content.innerHTML = '<p>This is the Reels page content.</p>';
+                break;
+            case 'Profile':
+                content.innerHTML = '<p>This is the Profile page content.</p>';
+                break;
+            default:
+                content.innerHTML = '<p>Welcome to my homepage!</p>';
+                break;
+        }
+    }
+
+</script>
+
+</body>
+</html>
